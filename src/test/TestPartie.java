@@ -11,7 +11,7 @@ import game.Partie;
  *
  * @author Tariq
  */
-public class testPartie {
+public class TestPartie {
 
     /**
      * @param args the command line arguments
