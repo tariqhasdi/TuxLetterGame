@@ -11,7 +11,7 @@ import game.Profil;
  *
  * @author Tariq
  */
-public class testProfil {
+public class TestProfil {
 
     /**
      * @param args the command line arguments
