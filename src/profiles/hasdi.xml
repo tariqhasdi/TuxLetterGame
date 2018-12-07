@@ -11,7 +11,7 @@ and open the template in the editor.
     xmlns:ns1='http://myGame/tux'
     xsi:schemaLocation='http://myGame/tux XMLSchema/profil.xsd'>
     
-    <ns1:nom>Alban</ns1:nom>
+    <ns1:nom>hasdi</ns1:nom>
     <ns1:avatar>Conan.jpg</ns1:avatar>
     <ns1:anniversaire>2006-05-08</ns1:anniversaire>
     <ns1:parties>

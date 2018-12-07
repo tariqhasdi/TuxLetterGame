@@ -221,7 +221,8 @@ public abstract class Jeu {
                 // demande le nom du joueur existant
                 nomJoueur = getNomJoueur();
                 // charge le profil de ce joueur si possible
-                if ( profil.charge(nomJoueur)) {
+                this.profil = new Profil(nomJoueur);
+                if (  profil.charge(nomJoueur) ) {
                     // lance le menu de jeu et récupère le choix à la sortie de ce menu de jeu
                     choix = menuJeu();
                 } else {
@@ -237,7 +238,7 @@ public abstract class Jeu {
                 // demande le nom du nouveau joueur
                 nomJoueur = getNomJoueur();
                 // crée un profil avec le nom d'un nouveau joueur
-                //profil = new Profil(nomJoueur);
+                profil = new Profil(nomJoueur,dateCourant());
                 // lance le menu de jeu et récupère le choix à la sortie de ce menu de jeu
                 choix = menuJeu();
                 break;
@@ -298,7 +299,10 @@ public abstract class Jeu {
                 // -----------------------------------------                
                 case Keyboard.KEY_1: // choisi un niveau et charge un mot depuis le dico
                     int niveau = menuNiveau();
+                    //this.dico = new Dico("src/xml/dico.xml");
+                    //String mot = this.dico.getMotDepuisListeNiveaux(niveau);
                     String mot = motATrouve(niveau);
+                    mot = this.dico.getMotDepuisListeNiveaux(niveau);
                     String date = dateCourant();
                     
                     System.out.println(niveau);
@@ -368,11 +372,11 @@ public abstract class Jeu {
         textNiveau5.display();
 
         // vérifie qu'une touche 1, 2, 3, 4 ou 5 est pressée
-        while (!(niveau == Keyboard.KEY_1 || niveau == Keyboard.KEY_2
-                || niveau == Keyboard.KEY_3 || niveau == Keyboard.KEY_4
-                || niveau == Keyboard.KEY_5)) {
-            niveau = env.getKey();
-            System.out.println("Vous avez appuie sur la touche : " + niveau);
+        int touche = 0;
+        while (!(touche == Keyboard.KEY_1 || touche == Keyboard.KEY_2
+                || touche == Keyboard.KEY_3 || touche == Keyboard.KEY_4
+                || touche == Keyboard.KEY_5)) {
+            touche = env.getKey();
             env.advanceOneFrame();
         }
 
@@ -386,6 +390,25 @@ public abstract class Jeu {
 
         // restaure la room du jeu
         env.setRoom(this.mainRoom);
+        
+        switch ( touche )
+        {
+            case Keyboard.KEY_1 :
+                                    niveau = 1;
+                                    break;
+            case Keyboard.KEY_2 :
+                                    niveau = 2;
+                                    break;
+            case Keyboard.KEY_3 :
+                                    niveau = 3;
+                                    break;
+            case Keyboard.KEY_4 :
+                                    niveau = 4;
+                                    break;
+            case Keyboard.KEY_5 :
+                                    niveau = 5;
+                                    break;
+        }
         return niveau;
     }
 
@@ -472,9 +495,7 @@ public abstract class Jeu {
                 // Contrôles des déplacements de Tux (gauche, droite, ...)
                 // ... (sera complété plus tard) ...
                 // Ici, on applique les regles
-                appliqueRegles(partie);
-
-                System.out.println("Continuer ... ");
+                finished = appliqueRegles(partie);
 
                 // Fait avancer le moteur de jeu (mise à jour de l'affichage, de l'écoute des événements clavier...)
                 this.tux.déplace();
@@ -502,7 +523,7 @@ public abstract class Jeu {
     }
     
     private String dateCourant(){
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         Date date = new Date();
         return dateFormat.format(date);
     }
@@ -525,7 +546,7 @@ public abstract class Jeu {
      * Méthode abstraite appliqueRègles(partie : Partie) : void
      * 
      */
-    abstract void appliqueRegles(Partie partie);
+    abstract boolean appliqueRegles(Partie partie);
     
     /**
      * Méthode abstraite terminePartie(partie : Partie) : void

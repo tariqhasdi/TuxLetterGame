@@ -7,13 +7,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import com.sun.org.apache.xerces.internal.parsers.DOMParser;
+import game.Partie;
 
-/*
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-*/
 public class Profil {
     
     public Document _doc;
@@ -22,6 +17,7 @@ public class Profil {
     private String dateNaissance;
     private String avatar;
     private ArrayList<Partie> parties;
+    private boolean existe = false;
 
     // Cree un nouveau profil
     public Profil(String nomJoueur, String dateNaissance ) {
@@ -29,35 +25,33 @@ public class Profil {
         this.dateNaissance = dateNaissance;
         this.avatar = "";
         this.parties = new ArrayList<Partie>();
+        this.existe = true;
     }
     
     public Profil(String nomFichier ) {
-        _doc = fromXML(nomFichier);
-        // parsing à compléter
-        // ?!#?!
-        
-          
-        this.nom = _doc.getElementsByTagName("ns1:nom").item(0).getTextContent();
-        this.dateNaissance = _doc.getElementsByTagName("ns1:anniversaire").item(0).getTextContent();
-        this.avatar = _doc.getElementsByTagName("ns1:avatar").item(0).getTextContent();
-        this.parties = null;
-        //this.parties = getParties(_doc.getElementsByTagName("ns1:parties") );
-
+        _doc = fromXML("src/profiles/"+nomFichier+".xml");
+        this.nom = _doc.getDocumentElement().getElementsByTagName("ns1:nom").item(0).getTextContent();
+        this.dateNaissance = xmlDateToProfileDate(_doc.getDocumentElement().getElementsByTagName("ns1:anniversaire").item(0).getTextContent());
+        this.avatar = _doc.getDocumentElement().getElementsByTagName("ns1:avatar").item(0).getTextContent();
+        NodeList partieNodeList = _doc.getDocumentElement().getElementsByTagName("ns1:partie");
+        this.parties = getParties(partieNodeList);
+        this.existe = true;
     }
-    /*
-    private ArrayList<Partie> getParties(NodeList partieNodeList){
+    
+    private ArrayList<Partie> getParties(NodeList partieNodeList)
+    {
         ArrayList<Partie> parties = new ArrayList<Partie>();
         int taille = partieNodeList.getLength();
-        for ( int i = 0 ; i < taille ; i++ ){
+        for ( int i = 0 ; i < taille ; i++ )
+        {
             parties.add( new Partie((Element )partieNodeList.item(i) ) );
-        
+        }
         return parties;   
-    }*/
+    }
     
-    public boolean charge(String nomJoueur){
-        String dateNaissance = "";
-        Profil profil = new Profil(nomJoueur, dateNaissance);
-        return true;   
+    public boolean charge(String nomJoueur)
+    {
+        return this.existe;   
     }
 
     // Cree un DOM à partir d'un fichier XML
@@ -78,11 +72,6 @@ public class Profil {
         return null;
     }
     
-    public String toString(){
-        return "nom : " + this.nom  
-                + "\n, dateNaissance : " + this.dateNaissance
-                + "\n, avatar : "+this.avatar;
-    }
 /*
     // Sauvegarde un DOM en XML
     public void toXML(String nomFichier) {
@@ -125,4 +114,21 @@ public class Profil {
         return date;
     }
 
-} 
+    public String toString()
+    {
+        String strPartie = "Parties\n";
+        int nbPartie = this.parties.size();
+        int i = 0;
+        for ( Partie partie : this.parties )
+        {
+            i++;
+            strPartie += "  Partie " + i + " :\n" 
+                        +"        mot : "+partie.getMot()+"\n"
+                        +"        niveau : "+partie.getNiveau()+"\n";
+        }
+        return "nom : " + this.nom  
+                + "\n, dateNaissance : " + this.dateNaissance
+                + "\n, avatar : "+this.avatar
+                + "\n"+ strPartie;
+    }
+}

@@ -3,6 +3,7 @@ package game;
 import com.sun.org.apache.xerces.internal.parsers.DOMParser;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import game.Profil;
 
 public class Partie{
     
@@ -21,15 +22,15 @@ public class Partie{
     }
     
     public Partie(Element partieElt ){
-        this.date = partieElt.getElementsByTagName("date").item(0).getTextContent();
-        this.mot = partieElt.getElementsByTagName("mot").item(0).getTextContent();
-        this.niveau = Integer.parseInt(partieElt.getElementsByTagName("niveau").item(0).getTextContent());
-        this.trouve = Integer.parseInt(partieElt.getElementsByTagName("trouve").item(0).getTextContent());
-        this.temps = Integer.parseInt(partieElt.getElementsByTagName("temps").item(0).getTextContent());
+        this.date = Profil.xmlDateToProfileDate(partieElt.getAttribute("date"));
+        this.mot = partieElt.getElementsByTagName("ns1:mot").item(0).getTextContent();
+        this.niveau = Integer.parseInt(  ((Element )partieElt.getElementsByTagName("ns1:mot").item(0)).getAttribute("niveau")  );
+        this.trouve = Integer.parseInt(partieElt.getAttribute("trouve").replace("%", ""));
+        this.temps = Integer.parseInt(partieElt.getElementsByTagName("ns1:temps").item(0).getTextContent());
     }
     
     public Element getPartie(Document doc){
-        return (Element )doc.getElementsByTagName("parties");
+        return (Element )doc.getDocumentElement().getElementsByTagName("parties");
     }
     
     public void setTrouve(int nbLettresRestantes){

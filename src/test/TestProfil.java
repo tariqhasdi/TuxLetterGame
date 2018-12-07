@@ -18,7 +18,7 @@ public class TestProfil {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Profil profil = new Profil("src/xml/profil.xml");
+        Profil profil = new Profil("hasdi.xml");
         System.out.println(profil.toString());
     }
     

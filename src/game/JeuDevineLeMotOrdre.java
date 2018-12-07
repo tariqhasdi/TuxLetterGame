@@ -28,7 +28,7 @@ public class JeuDevineLeMotOrdre extends Jeu{
         this.nbLettresRestantes = this.getLettres().size();
     }
     
-    protected void appliqueRegles(Partie partie) {
+    protected boolean appliqueRegles(Partie partie) {
         if ( this.chrono.remainsTime() && this.nbLettresRestantes > 0 ) {
             if (this.tuxTrouveLettre()) {
                 this.nbLettresRestantes--;
@@ -38,10 +38,9 @@ public class JeuDevineLeMotOrdre extends Jeu{
             }
         } else {
             // instructions pour arrêter le jeu
-            System.out.println("Paritie finie");
-            Env env = getEnv();
-            env.getKeyDown(49);
+            return true;
         }
+        return false;
     }
     
     protected void terminePartie(Partie partie){
