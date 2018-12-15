@@ -18,7 +18,7 @@ import org.w3c.dom.NodeList;
  *
  * @author firsovol
  */
-public class Dico {
+public final class Dico {
     
     public Document _doc;
     
@@ -38,7 +38,7 @@ public class Dico {
         listeNiveau5 = new ArrayList<String>();
         
         this.cheminFichierDico = cheminFichierDico;
-        /*
+        
         _doc = fromXML(cheminFichierDico);
 
         NodeList dicoNodeList = _doc.getElementsByTagName("ns1:mot"); 
@@ -70,7 +70,7 @@ public class Dico {
                         this.listeNiveau5.add(mot);
                         break;
             }     
-        }*/
+        }
     }
     
     public String getMotDepuisListeNiveaux(int niveau){   

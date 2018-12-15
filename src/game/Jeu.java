@@ -73,7 +73,7 @@ public abstract class Jeu {
         this.env.setDefaultControl(false);
         
         // Instancie le dico
-        this.dico = new Dico("cheminFichierDico");
+        this.dico = new Dico("src/xml/dico.xml");
 
         // Textes affichés à l'écran
         textMenuQuestion = new EnvText(env, "Voulez vous ?", 200, 300);
@@ -221,7 +221,7 @@ public abstract class Jeu {
                 // demande le nom du joueur existant
                 nomJoueur = getNomJoueur();
                 // charge le profil de ce joueur si possible
-                this.profil = new Profil(nomJoueur);
+                this.profil = new Profil("src/profiles/"+nomJoueur+".xml");
                 if (  profil.charge(nomJoueur) ) {
                     // lance le menu de jeu et récupère le choix à la sortie de ce menu de jeu
                     choix = menuJeu();
@@ -299,10 +299,9 @@ public abstract class Jeu {
                 // -----------------------------------------                
                 case Keyboard.KEY_1: // choisi un niveau et charge un mot depuis le dico
                     int niveau = menuNiveau();
-                    //this.dico = new Dico("src/xml/dico.xml");
-                    //String mot = this.dico.getMotDepuisListeNiveaux(niveau);
-                    String mot = motATrouve(niveau);
-                    mot = this.dico.getMotDepuisListeNiveaux(niveau);
+                    String mot = this.dico.getMotDepuisListeNiveaux(niveau);
+                    //String mot = motATrouve(niveau);
+                    //mot = this.dico.getMotDepuisListeNiveaux(niveau);
                     String date = dateCourant();
                     
                     System.out.println(niveau);

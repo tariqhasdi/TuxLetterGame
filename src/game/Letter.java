@@ -22,6 +22,7 @@ public class Letter extends EnvNode{
             setTexture("models/letter/cube.png"); 
         }
         else{
+            System.out.println("l = "+l);
             setTexture("models/letter/"+l+".png");    
         }
         setModel("models/letter/cube.obj");   

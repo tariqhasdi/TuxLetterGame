@@ -29,13 +29,17 @@ public class Profil {
     }
     
     public Profil(String nomFichier ) {
-        _doc = fromXML("src/profiles/"+nomFichier+".xml");
+        try{
+        _doc = fromXML(nomFichier);
         this.nom = _doc.getDocumentElement().getElementsByTagName("ns1:nom").item(0).getTextContent();
         this.dateNaissance = xmlDateToProfileDate(_doc.getDocumentElement().getElementsByTagName("ns1:anniversaire").item(0).getTextContent());
         this.avatar = _doc.getDocumentElement().getElementsByTagName("ns1:avatar").item(0).getTextContent();
         NodeList partieNodeList = _doc.getDocumentElement().getElementsByTagName("ns1:partie");
         this.parties = getParties(partieNodeList);
         this.existe = true;
+        }catch(Exception e){
+            System.out.println("Ce joueur n'existe pas");
+        }
     }
     
     private ArrayList<Partie> getParties(NodeList partieNodeList)
@@ -64,7 +68,7 @@ public class Profil {
             return document = parser.getDocument();
             //return XMLUtil.DocumentFactory.fromFile(nomFichier);
         }catch(Exception e){
-          
+            System.out.println("Erreur création de pointeur fichier");
         }
         /*} catch (Exception ex) {
             Logger.getLogger(Profil.class.getName()).log(Level.SEVERE, null, ex);

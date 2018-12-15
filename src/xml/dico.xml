@@ -11,16 +11,18 @@ and open the template in the editor.
     xmlns:ns1='http://myGame/tux'
     xsi:schemaLocation='http://myGame/tux XMLSchema/dico.xsd'>
     
-    <ns1:mot niveau = "1">Papa</ns1:mot>
-    <ns1:mot niveau = "1">Maman</ns1:mot>
-    <ns1:mot niveau = "2">Pomme</ns1:mot>
-    <ns1:mot niveau = "2">Banane</ns1:mot>
-    <ns1:mot niveau = "3">Voiture</ns1:mot>
-    <ns1:mot niveau = "3">Moto</ns1:mot>
-    <ns1:mot niveau = "4">Mouton</ns1:mot>
-    <ns1:mot niveau = "4">Gazelle</ns1:mot>
-    <ns1:mot niveau = "5">Ampoule</ns1:mot>
-    <ns1:mot niveau = "5">Tournevis</ns1:mot>
+    <ns1:mot niveau = "1">papa</ns1:mot>
+    <ns1:mot niveau = "1">maman</ns1:mot>
+    <ns1:mot niveau = "2">pomme</ns1:mot>
+    <ns1:mot niveau = "2">banane</ns1:mot>
+    <ns1:mot niveau = "3">voiture</ns1:mot>
+    <ns1:mot niveau = "3">moto</ns1:mot>
+    <ns1:mot niveau = "4">mouton</ns1:mot>
+    <ns1:mot niveau = "4">gazelle</ns1:mot>
+    <ns1:mot niveau = "5">ampoule</ns1:mot>
+    <ns1:mot niveau = "5">tournevis</ns1:mot>
+    <ns1:mot niveau = "5">programme</ns1:mot>
+    <ns1:mot niveau = "5">satelitte</ns1:mot>
 
 </ns1:dictionaire>
 
