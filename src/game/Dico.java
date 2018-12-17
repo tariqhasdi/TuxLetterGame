@@ -1,11 +1,8 @@
-
 package game;
-
 /**
  *
  * @author Tariq
  */
-
 
 import com.sun.org.apache.xerces.internal.parsers.DOMParser;
 import java.util.ArrayList;
@@ -14,10 +11,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-/**
- *
- * @author firsovol
- */
 public final class Dico {
     
     public Document _doc;
